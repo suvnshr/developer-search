@@ -7,6 +7,6 @@ A search engine for developers to find Github Repos, youtube tutorials, online c
 
 ## Why DevXplore?
 
-As a developer myself, I had problems finding the right tutorials, learning resources for me. Then one day I thought what if a search engine classifies its search into several categories for developers.
+As a developer myself, I had problems finding the right tutorials, learning resources for me. Then one day I thought what if a search engine classifies its search into several categories for developers. Try it out [here](https://devxplore.herokuapp.com/).
 
 So I created DevXplore.
