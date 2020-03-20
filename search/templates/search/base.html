@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>{% block title %} Dev Search {% endblock title %}</title>
+
+    {% block css %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="{% static 'index.min.css' %}" >
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% endblock css %}
+
+  </head>
+  <body class="major-mono">
+    <main>
+      {% block body %}
+      {% endblock body %}
+    </main>
+
+    <footer class="page-footer background z-depth-1">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text"> <span class="purple-text text-lighten-3">Dev</span>Xplore</h5>
+                <p class="grey-text text-lighten-4">The search engine for developers by a developer. </p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+              DevXplore © 2020
+            <a rel="noopener" target="_blank" class="grey-text text-lighten-4 right" href="https://www.github.com/suvansh-rana">About me </a>
+            </div>
+          </div>
+        </footer>
+
+    {% block js %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="{% static 'index.min.js' %}"></script>
+    {% endblock js %}
+
+
+  </body>
+</html>

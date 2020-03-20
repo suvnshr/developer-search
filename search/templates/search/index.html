@@ -1,0 +1,81 @@
+{% extends "search/base.html" %} {% block body %}
+{% load search_extras %}
+
+
+<div class="row">
+    <form method="GET" class="col s12 m6 offset-m3">
+
+        <h5 class="center-align major-mono"> <span id="dev-heading">Dev</span>Xplore</h5>
+        <div class="row"></div>
+        <div class="input-field z-depth-1" id="search-box">
+                <i id="search-icon" class="material-icons prefix">search</i>
+
+                <input
+                    type="search"
+                    id="search-field"
+                    placeholder="Search here"
+                    name="q"
+                    value="{{query}}"
+                />
+        </div>
+    </form>
+
+    {% if query %}
+
+        <div id="results" class="col s12 m6 offset-m3">
+
+                <ul class="tabs row">
+                    {% for category in results.keys %}
+                        <li class="tab m2 l2 xl2">
+                            <a class="{{category}} {% if forloop.counter0 == 0  %} active {% endif %}"  
+                                href="#search-{{category}}">
+                                {{category}}
+                            </a>
+                        </li>
+                    {% endfor %} 
+                </ul>
+
+                <div class="row"></div>
+
+                {% for category, search_results in results.items %}
+
+                    <div id="search-{{category}}">
+                        {% for item in search_results %}
+                                    <div class="card search-card">
+                                        <div class="card-content">
+                                            <a href="{{item.link}}" rel="noopener" class="card-title search-title black-text">{{item.title}}</a>
+                                            <p><span class="search-link" >{{item.htmlFormattedUrl | safe}}</span></p>
+                                            <p class="grey-text text-darken-2 search-snippet">{{item.htmlSnippet | safe}}</p>
+                                        </div>
+                                        
+                                    </div>
+
+                            {% empty %} 
+            
+                                {% if query and not limit_reached %}
+                                    <p class="center-align grey-text text-darken-2">
+                                        <span> 
+                                            <i class="material-icons">emoji_nature</i>
+                                            <span class="light-text med-font">Nothing found</span>
+                                        </span>
+                                    </p>
+
+                                {% elif query and limit_reached %}
+                                     <p class="center-align grey-text text-darken-2">
+                                        <span> 
+                                            <i class="material-icons">hourglass_empty</i>
+                                            <span class="light-text med-font">Limit reached</span>
+                                        </span>
+                                    </p>
+                                {% endif %} 
+
+                        {% endfor %}
+                    </div>
+
+                
+                {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
+{% endblock body %}

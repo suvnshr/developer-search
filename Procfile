@@ -1,0 +1,1 @@
+web: gunicorn dev_search_api.wsgi
