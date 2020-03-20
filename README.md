@@ -1,7 +1,7 @@
 # DevXplore 
 
-![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)
-![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/suvansh-rana/developer-search/issues/new)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://en.wikipedia.org/wiki/MIT_License)
 
 A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster.
 
