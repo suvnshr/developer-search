@@ -18,7 +18,6 @@ gunicorn==20.0.4
 html5lib==1.0.1
 httplib2==0.15.0
 idna==2.8
-pkg-resources==0.0.0
 psycopg2==2.7.5
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
