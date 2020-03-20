@@ -1,7 +1,7 @@
 # DevXplore 
 
-[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)   
-
+![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)
+![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)
 
 A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster.
 
