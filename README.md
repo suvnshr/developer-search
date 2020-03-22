@@ -10,3 +10,7 @@ A search engine for developers to find Github Repos, youtube tutorials, online c
 As a developer myself, I had problems finding the right tutorials, learning resources for me. Then one day I thought what if a search engine classifies its search into several categories for developers.
 
 So I created DevXplore.
+
+## Preview
+
+![Preview of DevXplore](gallery/devxplore.gif "Preview of DevXplore")
