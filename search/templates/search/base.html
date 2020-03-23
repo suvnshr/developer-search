@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    {% comment %} Favicon {% endcomment %}
     <link rel="icon" 
       type="image/png" 
       href="{% static 'short-logo.png' %}">
@@ -12,6 +14,7 @@
     <title>{% block title %} DevXplore - A Search Engine for Developers {% endblock title %}</title>
 
     {% block css %}
+      {% comment %} Materialize css {% endcomment %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link rel="stylesheet" href="{% static 'index.min.css' %}" >
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,11 +22,13 @@
 
   </head>
   <body class="major-mono">
+    {% comment %} Main content {% endcomment %}
     <main>
       {% block body %}
       {% endblock body %}
     </main>
 
+  {% comment %} Footer {% endcomment %}
     <footer class="page-footer background z-depth-1">
           <div class="container">
             <div class="row">
@@ -42,10 +47,10 @@
         </footer>
 
     {% block js %}
+        {% comment %} Materialize Js {% endcomment %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="{% static 'index.min.js' %}"></script>
     {% endblock js %}
-
 
   </body>
 </html>
