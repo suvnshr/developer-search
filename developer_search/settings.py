@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-production = False
+production = True
 
 DEBUG = not production
 ALLOWED_HOSTS = ['devxplore.herokuapp.com'] if production else []
@@ -134,3 +134,8 @@ HTML_MINIFY = True
 
 # Activate Django heroku
 django_heroku.settings(locals())
+
+# For forcing HTTPS 
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
