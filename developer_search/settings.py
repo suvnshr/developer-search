@@ -128,6 +128,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+# HTML minification ON
 HTML_MINIFY = True
 
 
