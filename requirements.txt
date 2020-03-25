@@ -1,15 +1,12 @@
 asgiref==3.2.3
-autopep8==1.5
 beautifulsoup4==4.8.2
 cachetools==4.0.0
 certifi==2019.11.28
 chardet==3.0.4
 dj-database-url==0.5.0
 Django==3.0.2
-django-cors-headers==3.2.1
 django-heroku==0.3.1
 django-htmlmin==0.11.0
-djangorestframework==3.11.0
 fuzzywuzzy==0.18.0
 google-api-python-client==1.7.11
 google-auth==1.10.1
@@ -19,9 +16,9 @@ html5lib==1.0.1
 httplib2==0.15.0
 idna==2.8
 psycopg2==2.7.5
+psycopg2-binary==2.8.4
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-pycodestyle==2.5.0
 python-decouple==3.3
 python-Levenshtein==0.12.0
 pytz==2019.3
