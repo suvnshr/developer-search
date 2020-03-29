@@ -4,6 +4,14 @@ When contributing to this repository, please first discuss the change you wish t
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
+## Changing the code
+
++ Before making any changes to the code, you need to [set up this project in your system](https://github.com/suvansh-rana/developer-search/wiki/Project-Setup).
+
++ To more deeply understand the code structure of the project, go [here](https://github.com/suvansh-rana/developer-search/wiki/About-the-Tech-Stack).
+
+
+---
 
 # Code of Conduct
 

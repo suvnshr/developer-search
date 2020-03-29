@@ -1,8 +1,5 @@
 # custom
 
-static/index.js
-static/index.css
-
 # Django #
 *.log
 *.pot
