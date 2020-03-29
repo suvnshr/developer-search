@@ -1,7 +1,12 @@
+<p align="center">
+  <img src="static/logo.png">
+</p>
+
 # DevXplore 
 
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/suvansh-rana/developer-search/issues/new)
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://en.wikipedia.org/wiki/MIT_License)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](LICENSE.md)
+
 
 A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster. Try it out [here](https://devxplore.herokuapp.com/).
 
@@ -14,3 +19,13 @@ So I created DevXplore.
 ## Preview
 
 ![Preview of DevXplore](gallery/devxplore.gif "Preview of DevXplore")
+
+
+## Contribute to this project
+
+For learning how you can contribute to this project, please visit our [Contributing Guidelines](https://github.com/suvansh-rana/developer-search/blob/master/CONTRIBUTING.md).
+
+
+## Run it on your system
+
+Follow [these](https://github.com/suvansh-rana/developer-search/wiki/Project-Setup) steps to set up this project on your system.
