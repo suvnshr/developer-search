@@ -29,3 +29,7 @@ For learning how you can contribute to this project, please visit our [Contribut
 ## Run it on your system
 
 Follow [these](https://github.com/suvansh-rana/developer-search/wiki/Project-Setup) steps to set up this project on your system.
+
+## Wiki
+
+For knowing more about the project, head over to our [wiki](https://github.com/suvansh-rana/developer-search/wiki).
