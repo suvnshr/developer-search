@@ -1,9 +1,8 @@
-from googleapiclient.discovery import build
 from urllib.error import HTTPError
 import tldextract
-from fuzzywuzzy import fuzz
-from fuzzywuzzy import process
 from decouple import config
+from rapidfuzz import fuzz
+from googleapiclient.discovery import build
 
 
 def keyword_in_search(search_item, keywords=()):
