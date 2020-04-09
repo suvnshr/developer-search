@@ -22,7 +22,7 @@ def keyword_in_search(search_item, keywords=()):
 
         if any(
             # fuzzy search
-            fuzz.WRatio(keyword.lower(), information.lower()) > 90 for keyword in keywords
+            fuzz.WRatio(keyword, information, score_cutoff=90) for keyword in keywords
         ):
 
             return True
