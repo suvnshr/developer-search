@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
     {% comment %} Favicon {% endcomment %}
     <link rel="icon" 
       type="image/png" 
@@ -16,6 +15,30 @@
     {% block css %}
       {% comment %} Materialize css {% endcomment %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+      {% comment %} No "theme" session is set, so follow the preferred color scheme set by system {% endcomment %}
+      {% if not theme %} 
+         <link rel="stylesheet" 
+              href="{% static 'light-variables.min.css' %}"
+              media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" >
+        <link 
+          rel="stylesheet" 
+          href="{% static 'dark-variables.min.css' %}" 
+          media="(prefers-color-scheme: dark)" >
+
+      {% comment %} Only include `light-variables` css, if session "theme" is set to "light" {% endcomment %}
+      {% elif theme == "light" %}
+        
+        <link rel="stylesheet" href="{% static 'light-variables.min.css' %}" >
+
+      {% comment %} Only include `dark-variables` css, if session "theme" is set to "dark" {% endcomment %}
+      {% elif theme == "dark"%}
+      
+        <link rel="stylesheet" href="{% static 'dark-variables.min.css' %}" >
+      
+      {% endif %}
+
         <link rel="stylesheet" href="{% static 'index.min.css' %}" >
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% endblock css %}
@@ -49,12 +72,23 @@
           <div class="footer-copyright">
             <div class="container">
               DevXplore © 2020
+
+              <div class="right">
+                <a 
+                  id="theme-toggle"
+                  href="#!"
+                  class="clickable grey-text text-lighten-2">
+                  ...
+                </a>
+              </div>
+            </div>
           </div>
         </footer>
 
     {% block js %}
         {% comment %} Materialize Js {% endcomment %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script type="text/javascript">const LIGHT_THEME_URL = "{{light_theme_url|safe}}";const DARK_THEME_URL = "{{dark_theme_url|safe}}";</script>
         <script src="{% static 'index.min.js' %}"></script>
     {% endblock js %}
 

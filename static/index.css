@@ -1,28 +1,43 @@
-:root {
-    /* --accent-color: #1e88e5; */
-    --accent-color: blue;
-    --accent-color-transparent: #1e88e520;
-    --borderRadius: 20px;
-    --youtube: red
+* {
+    transition: background-color 0.5s ease-out, color 0.5s ease-in-out;
 }
 
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: var(--page-background);
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+#dev-heading {
+    color: var(--accent-color);    
+} 
+
+#remaining-heading {
+    color: var(--search-text-color);
 }
 
 main {
    flex: 1 0 auto;
 }
 
-#dev-heading {
-    color: var(--accent-color);
+footer {
+    background-color: var(--footer-background)!important;
+    transition: opacity 0.2s ease-out;
+}
+
+.tabs {
+    background-color: var(--page-background);
 }
 
 .background {
     background-color: var(--accent-color);
 }
+
 
 .major-mono, input {
     /* font-family: 'Major Mono Display', monospace; */
@@ -44,9 +59,13 @@ main {
     color: var(--accent-color);
 }
 
+.tabs .tab a.active {
+    background-color: var(--object-background);
+}
+
 
 .tabs .tab a:focus, .tabs .tab a:focus.active {
-    background-color:var(--accent-color-transparent);
+    background-color:var(--object-background-transparent);
     outline: none;
 }
 
@@ -72,16 +91,17 @@ main {
 
 #search-box {
     border-radius: var(--borderRadius);
+    background-color: var(--object-background)!important;
 }
 
 #search-field{
     border: 0!important;
-    padding-left: 50px; 
+    padding-left:40px; 
     margin:0;
     background-color: transparent;
     font-size: 1em;
     font-weight: 200;
-    color: #111!important;
+    color: var(--search-text-color);
 }
 
 .no-margin {
@@ -92,6 +112,7 @@ main {
     left: 10px;
     font-size: 24px;
     top: 23%;
+    color: var(--icon-color)!important;
 }
 
 
@@ -101,11 +122,13 @@ main {
 
 .search-card{
     border-radius: var(--borderRadius);
+    background-color: var(--object-background)!important;
 }
 
 .search-title {
     font-size: 1em!important;
     line-height: 1.5!important;
+    color: var(--search-text-color);
 }
 
 .search-link {
@@ -117,6 +140,7 @@ main {
 .search-snippet {
     font-size:  0.85em!important;
     margin-top: 10px!important;
+    color: var(--search-snippet-color);
 }
 
 .med-font {

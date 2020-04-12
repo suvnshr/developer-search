@@ -1,0 +1,12 @@
+/* Light Mode */
+:root {
+    --accent-color: #8e24aa;
+    --accent-color-transparent: #1e88e520;
+    --borderRadius: 20px;
+    --object-background: #fff;
+    --page-background: #fff;
+    --footer-background: #8e24aa;
+    --icon-color: #111;
+    --search-text-color: #111;
+    --search-snippet-color: #555;
+}

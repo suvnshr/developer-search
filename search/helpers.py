@@ -3,6 +3,7 @@ import tldextract
 from decouple import config
 from rapidfuzz import fuzz
 from googleapiclient.discovery import build
+from urllib.parse import urlencode
 
 
 def keyword_in_search(search_item, keywords=()):
@@ -94,12 +95,44 @@ def classify_search(search_items, titles_and_details={}):
     return search_data
 
 
+def theme_filter(theme):
+
+    return {
+        "light": "light",
+        "dark": "dark",
+    }.get(theme, "light")
+
+
+def get_current_theme(request):
+   return request.session.get("theme")
+
+
+def get_requested_theme(request):
+
+    return request.GET.get("theme", None)
+
+
+def set_new_theme(request, theme):
+
+    theme = theme_filter(theme)
+    request.session["theme"] = theme
+    request.session.set_expiry(43800)
+
+
+def get_theme_url(request, query, theme):
+    return request.path + "?" + urlencode({
+        "q": query,
+        "theme": theme
+    })
+    
+
 def perform_search(search_query):
     """ calls the CSE engine api to perform search and then classifies the results into appropriate categories"""
 
-    API_KEY = config('API_KEY') 
+    API_KEY = config('API_KEY')
     CSE_KEY = config('CSE_KEY')
 
+    print(CSE_KEY)
 
     limit_reached = False
     result = {}

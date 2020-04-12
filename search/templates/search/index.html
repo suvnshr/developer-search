@@ -5,9 +5,10 @@
     <div class="row">
 
         {% comment %} Search form {% endcomment %}
-        <form method="GET" class="col s12 m6 offset-m3">
+        <form method="GET" class="col s12 m10 offset-m1">
 
-            <h5 class="center-align major-mono"> <span id="dev-heading">Dev</span>Xplore</h5>
+            <h5 class="center-align major-mono"> 
+            <span id="dev-heading">Dev</span><span id="remaining-heading">Xplore</span> </h5>
             <div class="row"></div>
             <div class="input-field z-depth-1" id="search-box">
                     <i id="search-icon" class="material-icons prefix">search</i>
@@ -50,9 +51,9 @@
                             {% for item in search_results %}
                                         <div class="card search-card">
                                             <div class="card-content">
-                                                <a href="{{item.link}}" rel="noopener" class="card-title search-title black-text">{{item.title}}</a>
+                                                <a href="{{item.link}}" rel="noopener" class="card-title search-title">{{item.title}}</a>
                                                 <p><span class="search-link" >{{item.htmlFormattedUrl | safe}}</span></p>
-                                                <p class="grey-text text-darken-2 search-snippet">{{item.htmlSnippet | safe}}</p>
+                                                <p class="search-snippet">{{item.htmlSnippet | safe}}</p>
                                             </div>
                                             
                                         </div>
