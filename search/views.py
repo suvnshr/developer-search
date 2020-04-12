@@ -15,8 +15,6 @@ def index(request):
     current_theme = get_current_theme(request)
     requested_theme = get_requested_theme(request)
 
-    print(current_theme, requested_theme)
-
     if requested_theme and requested_theme != current_theme:
         set_new_theme(request, requested_theme)
         current_theme = requested_theme

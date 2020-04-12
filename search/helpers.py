@@ -132,8 +132,6 @@ def perform_search(search_query):
     API_KEY = config('API_KEY')
     CSE_KEY = config('CSE_KEY')
 
-    print(CSE_KEY)
-
     limit_reached = False
     result = {}
 
