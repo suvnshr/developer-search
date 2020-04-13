@@ -88,8 +88,8 @@
     {% block js %}
         {% comment %} Materialize Js {% endcomment %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script type="text/javascript">const LIGHT_THEME_URL = "{{light_theme_url|safe}}";const DARK_THEME_URL = "{{dark_theme_url|safe}}";</script>
-        <script src="{% static 'index.min.js' %}"></script>
+        <script type="text/javascript">const overide_preferred_color_scheme={{theme_session_set|safe}},LIGHT_THEME_URL="{{light_theme_url|safe}}",DARK_THEME_URL="{{dark_theme_url|safe}}";</script>
+        <script src="{% static 'index.js' %}"></script>
     {% endblock js %}
 
   </body>

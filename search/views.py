@@ -31,4 +31,7 @@ def index(request):
         "theme": current_theme,
         "light_theme_url": light_theme_url,
         "dark_theme_url": dark_theme_url,
+        
+        # This varible beacuse even if the user changes its system dark theme settings, user's previous preference for the theme of the site will be given priority
+        "theme_session_set": "true" if request.session.get("theme", None) else "false"
     })
