@@ -5,6 +5,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    {% if not theme or theme == "light" %}
+      <meta name="theme-color" content="#8e24aa">
+    {% elif theme == "dark" %}
+      <meta name="theme-color" content="#333">
+    {% endif %}
+
     {% comment %} Favicon {% endcomment %}
     <link rel="icon" 
       type="image/png" 
