@@ -153,11 +153,11 @@ footer {
 }
 
 .credits-action {
-    padding: 10px!important;
+    padding: 9px!important;
 }
 
 .credits-action-link {
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .credits-title {
@@ -171,4 +171,8 @@ footer {
 .theme-button {
     color: var(--button-text-color)!important;
     background-color: var(--accent-color)!important;
+}
+
+.no-margin {
+    margin: 0;
 }
