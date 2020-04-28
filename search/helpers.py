@@ -6,6 +6,27 @@ from googleapiclient.discovery import build
 from urllib.parse import urlencode
 
 
+def manage_theme(request, query):
+    current_theme = get_current_theme(request)
+    requested_theme = get_requested_theme(request)
+
+    if requested_theme and requested_theme != current_theme:
+        set_new_theme(request, requested_theme)
+        current_theme = requested_theme
+
+    light_theme_url = get_theme_url(request, query, "light")
+    dark_theme_url = get_theme_url(request, query, "dark")
+
+    return {
+        "theme": current_theme,
+        "light_theme_url": light_theme_url,
+        "dark_theme_url": dark_theme_url,
+        
+        # This varible beacuse even if the user changes its system dark theme settings, user's previous preference for the theme of the site will be given priority
+        "theme_session_set": "true" if request.session.get("theme", None) else "false"
+    }
+
+
 def keyword_in_search(search_item, keywords=()):
     """ whether `keyword` is present in `search_item` """
 
@@ -120,10 +141,10 @@ def set_new_theme(request, theme):
 
 
 def get_theme_url(request, query, theme):
-    return request.path + "?" + urlencode({
-        "q": query,
-        "theme": theme
-    })
+
+    url_dict = {"q": query, "theme": theme} if query else {"theme": theme}
+
+    return request.path + "?" + urlencode(url_dict)
     
 
 def perform_search(search_query):
