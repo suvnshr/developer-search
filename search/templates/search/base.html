@@ -59,11 +59,15 @@
     </main>
 
   {% comment %} Footer {% endcomment %}
-    <footer class="page-footer background z-depth-1">
+    <footer class="page-footer z-depth-1">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text"> <span class="purple-text text-lighten-3">Dev</span>Xplore</h5>
+                <h5>  
+                  <a href="/">
+                    <span class="purple-text text-lighten-3">Dev</span><span class="white-text">Xplore</span>
+                  </a>
+                </h5>
                 <p class="grey-text text-lighten-4">The search engine for developers by a developer. </p>
               </div>
 
@@ -72,13 +76,17 @@
                 <ul>
                   <li><a class="grey-text text-lighten-3" href="https://www.github.com/suvansh-rana/developer-search">About the project</a></li>
                   <li><a class="grey-text text-lighten-3" href="https://www.github.com/suvansh-rana">About me</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{% url 'search:credits' %}">Credits</a></li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
-              DevXplore © 2020
+
+              <div class="left">
+                Copyright © 2020, Suvansh Rana
+              </div>
 
               <div class="right">
                 <a 
@@ -96,7 +104,7 @@
         {% comment %} Materialize Js {% endcomment %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script type="text/javascript">const overide_preferred_color_scheme={{theme_session_set|safe}},LIGHT_THEME_URL="{{light_theme_url|safe}}",DARK_THEME_URL="{{dark_theme_url|safe}}";</script>
-        <script src="{% static 'index.js' %}"></script>
+        <script src="{% static 'index.min.js' %}"></script>
     {% endblock js %}
 
   </body>

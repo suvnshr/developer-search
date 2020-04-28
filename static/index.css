@@ -7,6 +7,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-color: var(--page-background);
+    color: var(--page-color);
 }
 
 .clickable {
@@ -34,8 +35,8 @@ footer {
     background-color: var(--page-background);
 }
 
-.background {
-    background-color: var(--accent-color);
+.background, .background:hover {
+    background-color: var(--accent-color)!important;
 }
 
 
@@ -120,8 +121,8 @@ footer {
     font-weight: 200;
 }
 
-.search-card{
-    border-radius: var(--borderRadius);
+.search-card, .credits-card, .credits-card > .card-action{
+    border-radius: var(--borderRadius)!important;
     background-color: var(--object-background)!important;
 }
 
@@ -140,9 +141,34 @@ footer {
 .search-snippet {
     font-size:  0.85em!important;
     margin-top: 10px!important;
-    color: var(--search-snippet-color);
+    color: var(--snippet-color);
 }
 
 .med-font {
     font-size: 1.2em!important;
+}
+
+.credits-card > .card-content, .snippet-color {
+    color: var(--snippet-color);
+}
+
+.credits-action {
+    padding: 10px!important;
+}
+
+.credits-action-link {
+    font-size: 12px;
+}
+
+.credits-title {
+    color: var(--search-text-color);
+}
+
+.credits-button {
+    color: var(--accent-color)!important;
+}
+
+.theme-button {
+    color: var(--button-text-color)!important;
+    background-color: var(--accent-color)!important;
 }
