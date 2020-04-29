@@ -26,6 +26,7 @@ def index(request):
 def credits(request):
     """ Credits to all the open source projects used in DevXplore """
 
+    # Data of each open source project included
     projects = {
         'Django': {
             'description': 'Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design',

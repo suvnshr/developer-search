@@ -7,24 +7,41 @@ from urllib.parse import urlencode
 
 
 def manage_theme(request, query):
+
+    """ manages theme related tasks in each view:
+         - setting & unsetting of session variable `theme`
+         - url for the theme, opposite of the theme currently being used
+    """
+
+    # the current value of session variable
     current_theme = get_current_theme(request)
+    
+    # the theme requested by user
     requested_theme = get_requested_theme(request)
 
+    # check whether a theme is requested
+    # and the requested theme is different from the currently set theme
     if requested_theme and requested_theme != current_theme:
         set_new_theme(request, requested_theme)
         current_theme = requested_theme
 
+    # url to set light theme as the current theme
     light_theme_url = get_theme_url(request, query, "light")
+
+    # url to set dark theme as the current theme
     dark_theme_url = get_theme_url(request, query, "dark")
 
+    # this data will be passed in context of each view
     return {
         "theme": current_theme,
         "light_theme_url": light_theme_url,
         "dark_theme_url": dark_theme_url,
         
-        # This varible beacuse even if the user changes its system dark theme settings, user's previous preference for the theme of the site will be given priority
+        # whether the users has changed the theme using the button present on the site
+        # then user's system theme preference will no be supported
         "theme_session_set": "true" if request.session.get("theme", None) else "false"
     }
+
 
 
 def keyword_in_search(search_item, keywords=()):
@@ -117,23 +134,33 @@ def classify_search(search_items, titles_and_details={}):
 
 
 def theme_filter(theme):
+    """ filter the theme string, of something other than light or dark is provided, 
+        then it returns light """
 
     return {
         "light": "light",
+
         "dark": "dark",
     }.get(theme, "light")
 
 
 def get_current_theme(request):
-   return request.session.get("theme")
+    """ returns the value of current session variable 'theme' """
+    
+    return request.session.get("theme")
 
 
 def get_requested_theme(request):
+    """ 
+        gets the currently requested theme, 
+        by fetching the value of query parameter `theme` 
+    """
 
     return request.GET.get("theme", None)
 
 
 def set_new_theme(request, theme):
+    """ sets the session variable `theme` to the desired value """
 
     theme = theme_filter(theme)
     request.session["theme"] = theme
@@ -141,7 +168,9 @@ def set_new_theme(request, theme):
 
 
 def get_theme_url(request, query, theme):
+    """ returns the url to set a specific theme """
 
+    # remove `q` parameter if it is not mentioned
     url_dict = {"q": query, "theme": theme} if query else {"theme": theme}
 
     return request.path + "?" + urlencode(url_dict)
