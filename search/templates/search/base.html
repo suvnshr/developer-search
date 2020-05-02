@@ -50,6 +50,13 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% endblock css %}
 
+    {% if not debug %}
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ ANALYTICS_KEY }}"></script>
+      <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '{{ ANALYTICS_KEY }}');</script>
+    {% endif %}
+
+
   </head>
   <body class="major-mono">
     {% comment %} Main content {% endcomment %}

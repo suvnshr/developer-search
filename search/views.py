@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .helpers import perform_search, manage_theme
+from .helpers import perform_search, manage_theme, basic_context
 from urllib.parse import urlencode
+from django.conf import settings
+
 
 # Create your views here.
 
@@ -19,13 +21,15 @@ def index(request):
         "query": query,
         "results": results,
         "limit_reached": limit_reached,
-        **manage_theme(request, query)
+        **manage_theme(request, query),
+        **basic_context(),
     })
 
 
 def credits(request):
     """ Credits to all the open source projects used in DevXplore """
 
+    # Data of each open source project included
     projects = {
         'Django': {
             'description': 'Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design',
@@ -109,4 +113,5 @@ def credits(request):
     return render(request, "search/credits.html", {
         'projects': projects,
         **manage_theme(request, ""),
+        **basic_context(),
     })
