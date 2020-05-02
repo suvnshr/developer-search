@@ -41,7 +41,6 @@ footer {
 
 
 .major-mono, input {
-    /* font-family: 'Major Mono Display', monospace; */
     font-family: monospace;
 
 }
@@ -175,6 +174,8 @@ footer {
 .theme-button {
     color: var(--button-text-color)!important;
     background-color: var(--accent-color)!important;
+    text-transform: capitalize;
+    font-family: monospace;
 }
 
 .no-margin {
