@@ -74,6 +74,10 @@ footer {
     background-color:transparent;
 }
 
+.rounded {
+    border-radius: var(--borderRadius);
+}
+
 .tab a{
     border-radius: var(--borderRadius);
     text-transform: capitalize;

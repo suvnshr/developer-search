@@ -16,11 +16,17 @@
                     <input
                         type="search"
                         id="search-field"
-                        placeholder="Search for coding tutorials, courses, github repos ..."
+                        placeholder="Web, App, APIs"
                         name="q"
                         value="{{query}}"
                     />
             </div>
+            {% if not query %}
+                <div class="right-align ">
+                    <button type="submit" class="rounded btn-small theme-button" >Search</button>
+                </div>
+            {% endif %}
+
         </form>
 
         {% if query %}
