@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .helpers import perform_search, manage_theme, basic_context
+from .helpers import perform_search, manage_theme
 from urllib.parse import urlencode
 from django.conf import settings
 
@@ -22,7 +22,6 @@ def index(request):
         "results": results,
         "limit_reached": limit_reached,
         **manage_theme(request, query),
-        **basic_context(),
     })
 
 
@@ -113,5 +112,4 @@ def credits(request):
     return render(request, "search/credits.html", {
         'projects': projects,
         **manage_theme(request, ""),
-        **basic_context(),
     })
