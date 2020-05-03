@@ -7,18 +7,6 @@ from urllib.parse import urlencode
 from django.conf import settings
 
 
-def basic_context():
-    """ returns the basic context data required for each view """
-
-    debug = settings.DEBUG
-    ANALYTICS_KEY = config('ANALYTICS_KEY')
-
-    return {
-        'debug':debug, 
-        'ANALYTICS_KEY': ANALYTICS_KEY
-    }
-
-
 def manage_theme(request, query):
 
     """ manages theme related tasks in each view:
