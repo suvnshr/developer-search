@@ -221,6 +221,10 @@ def perform_search(search_query):
             'keywords': ("git", "github", "github link"),
             'domains': ("github.com", )
         },
+        'interactive sites':{
+            'keywords':("practice","interactive"),
+            'domains': ("flexboxfroggy.com","codepip.com/games/")
+        },
     })
 
     return search_data, limit_reached
