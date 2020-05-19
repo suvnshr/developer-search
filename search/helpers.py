@@ -221,9 +221,9 @@ def perform_search(search_query):
             'keywords': ("git", "github", "github link"),
             'domains': ("github.com", )
         },
-        'interactive sites':{
+        'Code Play':{
             'keywords':("practice","interactive"),
-            'domains': ("flexboxfroggy.com","codepip.com/games/")
+            'domains': ("flexboxfroggy.com","codepip.com")
         },
     })
 
