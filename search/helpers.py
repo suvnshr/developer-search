@@ -227,7 +227,7 @@ def perform_search(search_query):
             'keywords': ("git", "github", "github link"),
             'domains': ("github.com", )
         },
-        'Code play':{
+        'code play':{
             'keywords': ("code", "play"),
             'domains': ("flexboxfroggy.com", "codepip.com"),
             'must_contain_all_keywords': True
