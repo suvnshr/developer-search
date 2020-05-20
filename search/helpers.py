@@ -224,7 +224,7 @@ def perform_search(search_query):
             'domains': ("github.com", )
         },
         'Code play':{
-            'keywords': ("practice", "interactive"),
+            'keywords': ("game", "interactive"),
             'domains': ("flexboxfroggy.com", "codepip.com")
         },
     })
