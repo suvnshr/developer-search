@@ -45,22 +45,23 @@ def manage_theme(request, query):
 
 
 
-def keyword_in_search(search_item, keywords=()):
+def keyword_in_search(search_item, keywords=(), must_contain_all=False):
     """ whether `keyword` is present in `search_item` """
 
     link = search_item['link']
     title = search_item['title']
     snippet = search_item['snippet']
+    filter_func = all if must_contain_all else any
 
     for information in (link, title, snippet):
 
-        if any(
+        if filter_func(
             # normal search
             keyword.lower() in information.lower() for keyword in keywords
         ):
             return True
 
-        if any(
+        if filter_func(
             # fuzzy search
             fuzz.WRatio(keyword, information, score_cutoff=90) for keyword in keywords
         ):
@@ -101,6 +102,7 @@ def classify_search(search_items, titles_and_details={}):
 
         keywords = details.get('keywords', ())
         domains = details.get('domains', ())
+        must_contain_all_keywords = details.get('must_contain_all_keywords', False)
 
         def filter_domains(search_item):
             """ to filter all the `search_item`s which are from `domains` """
@@ -110,7 +112,11 @@ def classify_search(search_items, titles_and_details={}):
         def filter_keywords(search_item):
             """ to filter all the `search_item`s which contains `keyword` """
 
-            return keyword_in_search(search_item, keywords)
+            if must_contain_all_keywords:
+                return keyword_in_search(search_item, keywords, must_contain_all=True)
+
+            # else
+            return keyword_in_search(search_item, keywords, must_contain_all=False)
 
         # filtering all results which contains `keyword`
         keywords_filtered = list(
@@ -183,8 +189,6 @@ def perform_search(search_query):
     API_KEY = config('API_KEY')
     CSE_KEY = config('CSE_KEY')
 
-    print("$>" + CSE_KEY)
-
     limit_reached = False
     result = {}
 
@@ -224,8 +228,9 @@ def perform_search(search_query):
             'domains': ("github.com", )
         },
         'Code play':{
-            'keywords': ("game", "interactive"),
-            'domains': ("flexboxfroggy.com", "codepip.com")
+            'keywords': ("code", "play"),
+            'domains': ("flexboxfroggy.com", "codepip.com"),
+            'must_contain_all_keywords': True
         },
     })
 
