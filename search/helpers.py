@@ -183,6 +183,8 @@ def perform_search(search_query):
     API_KEY = config('API_KEY')
     CSE_KEY = config('CSE_KEY')
 
+    print("$>" + CSE_KEY)
+
     limit_reached = False
     result = {}
 
@@ -220,6 +222,10 @@ def perform_search(search_query):
         'github': {
             'keywords': ("git", "github", "github link"),
             'domains': ("github.com", )
+        },
+        'Code play':{
+            'keywords': ("practice", "interactive"),
+            'domains': ("flexboxfroggy.com", "codepip.com")
         },
     })
 

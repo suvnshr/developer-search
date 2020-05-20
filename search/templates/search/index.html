@@ -40,7 +40,7 @@
                         {% for category in results.keys %}
                             <li class="tab m2 l2 xl2">
                                 <a class="{{category}} {% if forloop.counter0 == 0  %} active {% endif %}"  
-                                    href="#search-{{category}}">
+                                    href="#search-{{category|to_hyphens}}">
                                     {{category}}
                                 </a>
                             </li>
@@ -53,7 +53,7 @@
                     {% comment %} Search results {% endcomment %}
                     {% for category, search_results in results.items %}
 
-                        <div id="search-{{category}}">
+                        <div id="search-{{category|to_hyphens}}">
                             {% for item in search_results %}
                                         <div class="card search-card">
                                             <div class="card-content">
