@@ -111,12 +111,7 @@ def classify_search(search_items, titles_and_details={}):
 
         def filter_keywords(search_item):
             """ to filter all the `search_item`s which contains `keyword` """
-
-            if must_contain_all_keywords:
-                return keyword_in_search(search_item, keywords, must_contain_all=True)
-
-            # else
-            return keyword_in_search(search_item, keywords, must_contain_all=False)
+            return keyword_in_search(search_item, keywords, must_contain_all=must_contain_all_keywords)
 
         # filtering all results which contains `keyword`
         keywords_filtered = list(
@@ -228,7 +223,7 @@ def perform_search(search_query):
             'domains': ("github.com", )
         },
         'code play':{
-            'keywords': ("code", "play"),
+            'keywords': ("code", "game"),
             'domains': ("flexboxfroggy.com", "codepip.com"),
             'must_contain_all_keywords': True
         },
