@@ -73,6 +73,10 @@ input {
   border-radius: var(--borderRadius);
 }
 
+i.material-icons.md-48 {
+    font-size: 48px;
+}
+
 .tab a {
   border-radius: var(--borderRadius);
   text-transform: capitalize;

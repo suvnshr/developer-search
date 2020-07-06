@@ -221,8 +221,6 @@ def perform_search(search_query, start_index=None):
         )
         result = response.json()
 
-        print(result)
-
         if 'queries' in result.keys():
             queries = result['queries']
 
@@ -235,6 +233,8 @@ def perform_search(search_query, start_index=None):
 
             if has_next_page:
                 next_page_start_index = queries['nextPage'][0]['startIndex']
+                if next_page_start_index >= 91:
+                    has_next_page = False
                 next_page_url = search_url_with_start_index(search_query, next_page_start_index)
 
         # if an array is not returned 
@@ -243,7 +243,7 @@ def perform_search(search_query, start_index=None):
         # if yes then print error message
 
         if 'error' in result.keys():
-            if result['error']['code'] == -1: # fix this
+            if result['error']['code'] == 429: # request limit reached
                 result = {}
                 limit_reached = True
 
