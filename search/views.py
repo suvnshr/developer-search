@@ -9,19 +9,17 @@ from django.conf import settings
 
 
 def index(request):
-    """ The page where users can search"""
+    """ The page where users can search """
 
     url_params = {}
     query = request.GET.get("q", "")
-
-    results, limit_reached = perform_search(query)
-
+    start_index = request.GET.get("start")
+    search_data = perform_search(query, start_index=start_index)
 
     return render(request, "search/index.html", {
         "query": query,
-        "results": results,
-        "limit_reached": limit_reached,
-        **manage_theme(request, query),
+        **search_data,
+        **manage_theme(request, query, start_index),
     })
 
 
