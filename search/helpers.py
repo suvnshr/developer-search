@@ -1,13 +1,18 @@
-from urllib.error import HTTPError
 import tldextract
 from decouple import config
 from rapidfuzz import fuzz
 from googleapiclient.discovery import build
 from urllib.parse import urlencode
 from django.conf import settings
+import requests
 
 
-def manage_theme(request, query):
+def search_url_with_start_index(query, start):
+    """ returns url for search results of next or previous page """
+
+    return f"?q={query}&start={start}"
+
+def manage_theme(request, query, start_index):
 
     """ manages theme related tasks in each view:
          - setting & unsetting of session variable `theme`
@@ -27,10 +32,10 @@ def manage_theme(request, query):
         current_theme = requested_theme
 
     # url to set light theme as the current theme
-    light_theme_url = get_theme_url(request, query, "light")
+    light_theme_url = get_theme_url(request, query, "light", start_index)
 
     # url to set dark theme as the current theme
-    dark_theme_url = get_theme_url(request, query, "dark")
+    dark_theme_url = get_theme_url(request, query, "dark", start_index)
 
     # this data will be passed in context of each view
     return {
@@ -77,7 +82,7 @@ def domain_in_search(search_item, domains=()):
     link = search_item['link']
 
     if len(domains) == 0:
-        # if no domains are provid  ed then return True
+        # if no domains are provided then return True
         # i.e: Let it appear on search
 
         return True
@@ -169,39 +174,85 @@ def set_new_theme(request, theme):
     request.session.set_expiry(43800)
 
 
-def get_theme_url(request, query, theme):
+def get_theme_url(request, query, theme, start_index=None):
     """ returns the url to set a specific theme """
 
     # remove `q` parameter if it is not mentioned
     url_dict = {"q": query, "theme": theme} if query else {"theme": theme}
 
+    # add `start` parameter to url
+    if start_index:
+        url_dict['start'] = start_index
+
     return request.path + "?" + urlencode(url_dict)
     
 
-def perform_search(search_query):
+def perform_search(search_query, start_index=None):
     """ calls the CSE engine api to perform search and then classifies the results into appropriate categories"""
 
     API_KEY = config('API_KEY')
     CSE_KEY = config('CSE_KEY')
 
+    has_prev_page = False
+    has_next_page = False
     limit_reached = False
+
+    prev_page_start_index = None
+    next_page_start_index = None
+
+    prev_page_url = None
+    next_page_url = None
+
     result = {}
 
     if search_query:
-        try:
-            # calling api
-            resource = build("customsearch", 'v1', developerKey=API_KEY).cse()
-            result = resource.list(q=search_query, cx=CSE_KEY).execute()
-        except:
-            result = {}
-            limit_reached = True
+        # calling api
+        
+        headers =  {
+            'Accept-Encoding': 'gzip',
+            'User-Agent': 'devXplore(gzip)',
+        }
+        start_query = f"start={start_index}" if start_index else ""
+        custom_search_url = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={CSE_KEY}&q={search_query}&fields=queries(previousPage,nextPage),items(title,link,snippet,htmlSnippet,htmlFormattedUrl)&{start_query}"
+
+        response = requests.get(
+            custom_search_url,
+            headers=headers
+        )
+        result = response.json()
+
+        if 'queries' in result.keys():
+            queries = result['queries']
+
+            has_prev_page = 'previousPage' in queries.keys()
+            has_next_page = 'nextPage' in queries.keys()
+
+            if has_prev_page:
+                prev_page_start_index = queries['previousPage'][0]['startIndex']
+                prev_page_url = search_url_with_start_index(search_query, prev_page_start_index)
+
+            if has_next_page:
+                next_page_start_index = queries['nextPage'][0]['startIndex']
+                if next_page_start_index > 91:
+                    has_next_page = False
+                next_page_url = search_url_with_start_index(search_query, next_page_start_index)
+
+        # if an array is not returned 
+        # it means that an error has occured
+        # check if a key named `error` exists or not
+        # if yes then print error message
+
+        if 'error' in result.keys():
+            if result['error']['code'] == 429: # request limit reached
+                result = {}
+                limit_reached = True
 
     original_search_data = result
     search_items = original_search_data.get('items', [])
 
     # all the categories and the keywords of that categories
 
-    search_data = classify_search(search_items, {
+    results = classify_search(search_items, {
         'youtube': {
             'keywords': ("youtube.com", "youtube",),
             'domains': ('youtube.com',)
@@ -229,4 +280,13 @@ def perform_search(search_query):
         },
     })
 
-    return search_data, limit_reached
+    return {
+        'results': results,
+        'limit_reached': limit_reached,
+        
+        'has_next_page': has_next_page,
+        'has_prev_page': has_prev_page,
+
+        'prev_page_url': prev_page_url,
+        'next_page_url': next_page_url,
+    }
