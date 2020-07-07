@@ -233,7 +233,7 @@ def perform_search(search_query, start_index=None):
 
             if has_next_page:
                 next_page_start_index = queries['nextPage'][0]['startIndex']
-                if next_page_start_index >= 91:
+                if next_page_start_index > 91:
                     has_next_page = False
                 next_page_url = search_url_with_start_index(search_query, next_page_start_index)
 
