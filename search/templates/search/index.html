@@ -23,7 +23,7 @@
             </div>
             {% if not query %}
                 <div class="right-align ">
-                    <button type="submit" class="rounded btn-small theme-button" >Search</button>
+                    <button type="submit" class="rounded btn-small waves-effect theme-button" >Search</button>
                 </div>
             {% endif %}
 
@@ -103,7 +103,7 @@
                                 {% if has_prev_page %}
                                     <div class="left">
                                         <a href="{{prev_page_url}}#search-{{category}}" 
-                                            class="btn-small rounded theme-button white-text transparent">
+                                            class="btn-small waves-effect rounded theme-button white-text transparent">
                                             <i class="material-icons left">arrow_back</i>
                                             <span>Previous</span>
                                         </a>
@@ -113,7 +113,7 @@
                                 {% if has_next_page %}
                                     <div class="right">
                                         <a href="{{next_page_url}}#search-{{category}}" 
-                                            class="btn-small rounded theme-button white-text transparent">
+                                            class="btn-small waves-effect rounded theme-button white-text transparent">
                                             <span>Next</span>
                                             <i class="material-icons right">arrow_forward</i>
                                         </a>
