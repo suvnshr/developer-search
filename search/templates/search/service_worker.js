@@ -45,6 +45,9 @@ self.addEventListener("install", event => {
             .then(cache => {
                 return cache.addAll(filesToCache);
             })
+            .catch(err => {
+                console.log("Error: Can't open files to be cached.")
+            })
     )
 });
 
