@@ -1,0 +1,52 @@
+{% extends 'search/base.html' %}
+{% load static %}
+
+{% block css %}
+
+    <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'light-variables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index.min.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+{% endblock css %}
+
+{% block body %}
+
+    <div style="height:70vh!important;width:100%;display:flex;align-items:center;justify-content:center" >
+    
+        <div class="center-align">
+
+            <div class="row">
+                <img src="{% static 'logo.png' %}" alt="DevXplore" />
+            </div>
+
+            <div class="row"></div>
+            <div class="row"></div>
+            
+            <div 
+                class="center-align grey-text text-darken-2">
+
+                <div class="row"> 
+                    <i class="material-icons md-48">emoji_nature</i>
+                </div>
+                <div>
+                    <span class="light-text med-font">You are offline</span>
+                </div>
+            </div>
+            
+            <div class="center-align grey-text text-darken-2">
+                <span> 
+                    <small class="light-text">Try connecting to a network</small>
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock body %}
+
+{% block footer %}{% endblock footer %}

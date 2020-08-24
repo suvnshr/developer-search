@@ -1,4 +1,6 @@
 {% load static %}
+{% load pwa %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +17,8 @@
     {% elif theme == "dark" %}
       <meta name="theme-color" content="#333">
     {% endif %}
+
+    {% progressive_web_app_meta %}
 
     {% comment %} Favicon {% endcomment %}
     <link rel="icon" 
@@ -62,7 +66,10 @@
       {% endblock body %}
     </main>
 
+
   {% comment %} Footer {% endcomment %}
+  {% block footer %}
+
     <footer class="page-footer z-depth-1">
           <div class="container">
             <div class="row">
@@ -103,6 +110,8 @@
             </div>
           </div>
         </footer>
+
+  {% endblock footer %}
 
     {% block js %}
         {% comment %} Materialize Js {% endcomment %}
