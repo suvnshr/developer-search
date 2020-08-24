@@ -28,7 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 production = True
 
 DEBUG = not production
-ALLOWED_HOSTS = ['devxplore.herokuapp.com'] if production else []
+ALLOWED_HOSTS = ['devxplore.herokuapp.com', 'dev-devxplore.herokuapp.com'] if production else []
 
 
 # Application definition
