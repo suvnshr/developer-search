@@ -28,13 +28,14 @@ SECRET_KEY = config("SECRET_KEY")
 production = True
 
 DEBUG = not production
-ALLOWED_HOSTS = ['devxplore.herokuapp.com'] if production else []
+ALLOWED_HOSTS = ['devxplore.herokuapp.com', 'dev-devxplore.herokuapp.com'] if production else []
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'search.apps.SearchConfig',
+    'pwa',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,3 +140,94 @@ django_heroku.settings(locals())
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
+
+
+PWA_APP_NAME = 'DevXplore'
+PWA_APP_DESCRIPTION = "A search engine for developers"
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'black-translucent'
+
+PWA_APP_ICONS = [
+    {
+        'src': 'static/icons/android-icon-36x36.png',
+        'sizes': '36x36',
+    },
+    {
+        'src': 'static/icons/android-icon-48x48.png',
+        'sizes': '48x48',
+    },
+    {
+        'src': 'static/icons/android-icon-72x72.png',
+        'sizes': '72x72',
+    },
+    {
+        'src': 'static/icons/android-icon-96x96.png',
+        'sizes': '96x96',
+    },
+    {
+        'src': 'static/icons/android-icon-144x144.png',
+        'sizes': '144x144',
+    },
+    {
+        'src': 'static/icons/android-icon-192x192.png',
+        'sizes': '192x192',
+    },
+]
+
+
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': 'static/icons/apple-icon-57x57.png',
+        'sizes': '57x57',
+    },
+    {
+        'src': 'static/icons/apple-icon-60x60.png',
+        'sizes': '60x60',
+    },
+    {
+        'src': 'static/icons/apple-icon-72x72.png',
+        'sizes': '72x72',
+    },
+    {
+        'src': 'static/icons/apple-icon-76x76.png',
+        'sizes': '76x76',
+    },
+    {
+        'src': 'static/icons/apple-icon-114x114.png',
+        'sizes': '114x114',
+    },
+    {
+        'src': 'static/icons/apple-icon-120x120.png',
+        'sizes': '120x120',
+    },
+    {
+        'src': 'static/icons/apple-icon-144x144.png',
+        'sizes': '144x144',
+    },
+    {
+        'src': 'static/icons/apple-icon-152x152.png',
+        'sizes': '152x152',
+    },
+    {
+        'src': 'static/icons/apple-icon-180x180.png',
+        'sizes': '180x180',
+    },
+]
+
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': 'static/logo.png',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
+    }
+]
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'search/templates/search', 'service_worker.js')
+
+
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
+PWA_APP_DEBUG_MODE = True
