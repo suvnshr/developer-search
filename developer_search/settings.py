@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-production = True
+production = False
 
 DEBUG = not production
 ALLOWED_HOSTS = ['devxplore.herokuapp.com', 'dev-devxplore.herokuapp.com'] if production else []
@@ -139,13 +139,12 @@ django_heroku.settings(locals())
 
 # For forcing HTTPS 
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 
 
 PWA_APP_NAME = 'DevXplore'
 PWA_APP_DESCRIPTION = "A search engine for developers"
-PWA_APP_THEME_COLOR = '#8e24aa'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'

@@ -14,7 +14,9 @@
 
     {% if not theme or theme == "light" %}
       <meta name="theme-color" content="#370e42">
-    {% elif theme == "dark" %}
+    {% endif %}
+
+    {% if theme == "dark" %}
       <meta name="theme-color" content="#222">
     {% endif %}
 
