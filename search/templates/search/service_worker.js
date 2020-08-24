@@ -2,39 +2,39 @@
 
 var staticCacheName = "django-pwa-v" + new Date().getTime();
 var filesToCache = [
-    '/offline/',
+    './offline/',
 
     // CSS
-    '/static/css/django-pwa-app.css',
-    '/static/index.min.css/',
-    '/static/light-variables.min.css/',
-    '/static/dark-variables.min.css/',
+    './static/css/django-pwa-app.css',
+    './static/index.min.css/',
+    './static/light-variables.min.css/',
+    './static/dark-variables.min.css/',
 
     // JS
-    '/static/index.min.js',
+    './static/index.min.js',
 
     // Logo
-    '/static/logo.png',
-    '/static/short-logo.png',
+    './static/logo.png',
+    './static/short-logo.png',
 
     // Android Icons
-    '/static/icons/android-icon-36x36.png',
-    '/static/icons/android-icon-48x48.png',
-    '/static/icons/android-icon-72x72.png',
-    '/static/icons/android-icon-96x96.png',
-    '/static/icons/android-icon-144x144.png',
-    '/static/icons/android-icon-192x192.png',
+    './static/icons/android-icon-36x36.png',
+    './static/icons/android-icon-48x48.png',
+    './static/icons/android-icon-72x72.png',
+    './static/icons/android-icon-96x96.png',
+    './static/icons/android-icon-144x144.png',
+    './static/icons/android-icon-192x192.png',
 
     //  Apple Icons
-    '/static/icons/apple-icon-57x57.png',
-    '/static/icons/apple-icon-60x60.png',
-    '/static/icons/apple-icon-72x72.png',
-    '/static/icons/apple-icon-76x76.png',
-    '/static/icons/apple-icon-114x114.png',
-    '/static/icons/apple-icon-120x120.png',
-    '/static/icons/apple-icon-144x144.png',
-    '/static/icons/apple-icon-152x152.png',
-    '/static/icons/apple-icon-180x180.png',
+    './static/icons/apple-icon-57x57.png',
+    './static/icons/apple-icon-60x60.png',
+    './static/icons/apple-icon-72x72.png',
+    './static/icons/apple-icon-76x76.png',
+    './static/icons/apple-icon-114x114.png',
+    './static/icons/apple-icon-120x120.png',
+    './static/icons/apple-icon-144x144.png',
+    './static/icons/apple-icon-152x152.png',
+    './static/icons/apple-icon-180x180.png',
 ];
 
 // Cache on install
