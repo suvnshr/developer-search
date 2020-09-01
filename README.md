@@ -8,7 +8,9 @@
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](LICENSE.md)
 
 
-A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster. Try it out [here](https://devxplore.herokuapp.com/).
+A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster. 
+
+[Visit DevXplore :arrow_upper_right:](https://devxplore.herokuapp.com/).
 
 ## Why DevXplore?
 
