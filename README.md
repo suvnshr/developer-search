@@ -9,7 +9,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/suvansh-rana/developer-search)](https://github.com/suvansh-rana/developer-search/issues)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster. 
+A search engine for developers for finding Github Repos, youtube tutorials, online courses, and documentation faster. 
 
 [Visit DevXplore :arrow_upper_right:](https://devxplore.herokuapp.com/).
 
