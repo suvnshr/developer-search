@@ -1,4 +1,4 @@
-* {
+*:not(body) {
   transition: background-color 0.5s ease-out, color 0.5s ease-in-out;
 }
 
@@ -8,6 +8,11 @@ body {
   flex-direction: column;
   background-color: var(--page-background);
   color: var(--page-color);
+}
+
+#theme-toggle {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .clickable {
@@ -28,7 +33,7 @@ main {
 
 footer {
   background-color: var(--footer-background) !important;
-  transition: opacity 0.2s ease-out;
+  transition: background-color 0.5s ease-out, color 0.5s ease-in-out, opacity 0.2s ease-out;
 }
 
 .tabs {
@@ -48,10 +53,21 @@ input {
 .tabs {
   overflow-x: auto;
   height: 70px;
+  padding: 0 10px;
+  padding-top: 15px;
+}
+
+.tabs .tab {
+  margin: 0 7px;
 }
 
 .tabs .tab a {
   color: var(--accent-color);
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 .tabs .tab a:hover,
@@ -59,10 +75,15 @@ input {
   color: var(--accent-color);
 }
 
+.tabs .tab a.active {
+  box-shadow: 0 2px 2px 0 var(--accent-color),
+    0 3px 1px -2px var(--accent-color), 0 1px 5px 0 var(--accent-color);
+}
+
 .tabs .tab a.active,
 .tabs .tab a:focus,
 .tabs .tab a:focus.active {
-  background-color: var(--object-background);
+  background-color: var(--active-tab-color);
 }
 
 .tabs .indicator {
@@ -74,7 +95,7 @@ input {
 }
 
 i.material-icons.md-48 {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 .tab a {
@@ -84,7 +105,7 @@ i.material-icons.md-48 {
 }
 
 .tab a.active {
-  border-bottom: 1.5px solid var(--accent-color);
+  /* border-bottom: 1.5px solid var(--accent-color); */
   background-color: var(--accent-color-transparent);
 }
 
@@ -181,4 +202,22 @@ i.material-icons.md-48 {
 
 .no-margin {
   margin: 0;
+}
+
+ul.tabs.row {
+  scrollbar-width: thin;
+}
+
+ul.tabs.row::-webkit-scrollbar {
+  height: 5px !important;
+}
+
+ul.tabs.row::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-background);
+}
+
+ul.tabs.row::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 30px !important;
+  border: 1px solid var(--scrollbar-background);
 }
