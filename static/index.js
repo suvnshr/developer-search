@@ -23,7 +23,23 @@ function prepareForNextTheme(themeToggle) {
   }
 }
 
-window.addEventListener("load", function () {
+function clearThemeQueryParameter() {
+  const currentUrlParams = window.location.search.toString();
+
+  const urlSearchParamObj = new URLSearchParams(currentUrlParams);
+
+  urlSearchParamObj.delete("theme");
+
+  let newParams = urlSearchParamObj.toString();
+
+  if (newParams.length) newParams = "?" + newParams;
+
+  const newUrl = window.location.pathname + newParams + window.location.hash;
+
+  window.history.replaceState({}, document.title, newUrl);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
   const searchField = document.querySelector("#search-field");
   const footer = document.querySelector("footer");
   const themeToggle = document.querySelector("#theme-toggle");
@@ -31,15 +47,16 @@ window.addEventListener("load", function () {
 
   setTimeout(() => prepareForNextTheme(themeToggle), 600);
 
+  clearThemeQueryParameter();
+
   darkModeMediaQuery.addEventListener("change", (e) => {
     if (!overide_preferred_color_scheme) {
       const darkModeOn = e.matches;
-      console.log(darkModeOn);
 
       darkModeOn
         ? prepareForLightTheme(themeToggle)
         : prepareForDarkTheme(themeToggle);
-      console.log(`Dark mode is ${darkModeOn ? "🌒 on" : "☀️ off"}.`);
+      // console.log(`Dark mode is ${darkModeOn ? "🌒 on" : "☀️ off"}.`);
     }
   });
 

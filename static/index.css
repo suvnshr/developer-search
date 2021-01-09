@@ -1,4 +1,4 @@
-* {
+*:not(body) {
   transition: background-color 0.5s ease-out, color 0.5s ease-in-out;
 }
 
@@ -33,7 +33,7 @@ main {
 
 footer {
   background-color: var(--footer-background) !important;
-  transition: opacity 0.2s ease-out;
+  transition: background-color 0.5s ease-out, color 0.5s ease-in-out, opacity 0.2s ease-out;
 }
 
 .tabs {
