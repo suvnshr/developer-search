@@ -203,7 +203,7 @@ def perform_search(search_query, start_index=None):
     prev_page_url = None
     next_page_url = None
 
-    result = {}
+    results = {}
 
     if search_query:
         # calling api
@@ -219,10 +219,10 @@ def perform_search(search_query, start_index=None):
             custom_search_url,
             headers=headers
         )
-        result = response.json()
+        api_response_data = response.json()
 
-        if 'queries' in result.keys():
-            queries = result['queries']
+        if 'queries' in api_response_data.keys():
+            queries = api_response_data['queries']
 
             has_prev_page = 'previousPage' in queries.keys()
             has_next_page = 'nextPage' in queries.keys()
@@ -242,43 +242,42 @@ def perform_search(search_query, start_index=None):
         # check if a key named `error` exists or not
         # if yes then print error message
 
-        if 'error' in result.keys():
-            if result['error']['code'] == 429: # request limit reached
-                result = {}
+        if 'error' in api_response_data.keys():
+            if api_response_data['error']['code'] == 429: # request limit reached
+                api_response_data = {}
                 limit_reached = True
 
-    original_search_data = result
-    search_items = original_search_data.get('items', [])
+        search_items = api_response_data.get('items', [])
 
-    # all the categories and the keywords of that categories
+        # all the categories and the keywords of that categories
 
-    results = classify_search(search_items, {
-        'youtube': {
-            'keywords': ("youtube.com", "youtube",),
-            'domains': ('youtube.com',)
-        },
-        'courses': {
-            'keywords': ("courses", "course",),
-            'domains': ('udemy.com', "udacity.com", "coursera.com")
-        },
-        'tutorials': {
-            'keywords': ("tutorials", "tutorial", "get started", ),
-            'domains': ("tutorialspoint.com")
-        },
-        'docs': {
-            'keywords': ("docs", "documentation", "official documentation"),
-            'domains': ()
-        },
-        'github': {
-            'keywords': ("git", "github", "github link"),
-            'domains': ("github.com", )
-        },
-        'code play':{
-            'keywords': ("code", "game"),
-            'domains': ("flexboxfroggy.com", "codepip.com"),
-            'must_contain_all_keywords': True
-        },
-    })
+        results = classify_search(search_items, {
+            'youtube': {
+                'keywords': ("youtube.com", "youtube",),
+                'domains': ('youtube.com',)
+            },
+            'courses': {
+                'keywords': ("courses", "course",),
+                'domains': ('udemy.com', "udacity.com", "coursera.com")
+            },
+            'tutorials': {
+                'keywords': ("tutorials", "tutorial", "get started", ),
+                'domains': ("tutorialspoint.com")
+            },
+            'docs': {
+                'keywords': ("docs", "documentation", "official documentation"),
+                'domains': ()
+            },
+            'github': {
+                'keywords': ("git", "github", "github link"),
+                'domains': ("github.com", )
+            },
+            'code play':{
+                'keywords': ("code", "game"),
+                'domains': ("flexboxfroggy.com", "codepip.com"),
+                'must_contain_all_keywords': True
+            },
+        })
 
     return {
         'results': results,
