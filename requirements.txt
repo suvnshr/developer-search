@@ -7,3 +7,4 @@ python-decouple==3.3
 rapidfuzz==0.7.9
 tldextract==2.2.2
 django-pwa==1.0.10
+pylint
