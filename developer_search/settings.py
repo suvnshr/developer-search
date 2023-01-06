@@ -25,10 +25,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-production = True
+production = config("PROD") == "True"
 
 DEBUG = not production
-ALLOWED_HOSTS = ['devxplore.herokuapp.com', 'dev-devxplore.herokuapp.com'] if production else []
+
+ALLOWED_HOSTS_FROM_ENV = config("ALLOWED_HOSTS")
+PROD_ALLOWED_HOSTS = ALLOWED_HOSTS_FROM_ENV.split(
+    ",") if ALLOWED_HOSTS_FROM_ENV else []
+ALLOWED_HOSTS = PROD_ALLOWED_HOSTS if production else []
 
 
 # Application definition
@@ -136,11 +140,11 @@ HTML_MINIFY = True
 # Activate Django heroku
 django_heroku.settings(locals())
 
-# For forcing HTTPS 
+# For forcing HTTPS
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO',
+                           'https') if production else ("", "")
+SECURE_SSL_REDIRECT = production
 
 PWA_APP_NAME = 'DevXplore'
 PWA_APP_DESCRIPTION = "A search engine for developers"
@@ -225,7 +229,8 @@ PWA_APP_SPLASH_SCREEN = [
     }
 ]
 
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'search/templates/search', 'service_worker.js')
+PWA_SERVICE_WORKER_PATH = os.path.join(
+    BASE_DIR, 'search/templates/search', 'service_worker.js')
 
 
 PWA_APP_DIR = 'ltr'
