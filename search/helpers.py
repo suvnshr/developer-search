@@ -12,7 +12,7 @@ def search_url_with_start_index(query, start):
 
     return f"?q={query}&start={start}"
 
-def manage_theme(request, query, start_index):
+def manage_theme(request, query, start_index=None):
 
     """ manages theme related tasks in each view:
          - setting & unsetting of session variable `theme`
