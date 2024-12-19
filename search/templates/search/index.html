@@ -63,8 +63,28 @@
                                         </div>
                                 {% empty %} 
 
+
                                     {% comment %} if no results found and daily search limit is not reached {% endcomment %}
-                                    {% if query and not limit_reached %}
+                                    {% if error_occured %}
+                                        <div class="center-align grey-text text-darken-2">
+                                            <div class="row"> 
+                                                <i class="material-icons md-48">warning</i>
+                                            </div>
+                                            <div>
+                                                <span class="light-text med-font">Something went wrong</span>
+                                            </div>
+                                        </div>
+                                        <div class="center-align grey-text text-darken-2">
+                                            <span> 
+                                                <small class="light-text">Please try again in a while</small>
+                                            </span>
+                                        </div>
+                                        <div class="row"></div>
+
+                                    {% comment %} if no results found and daily search limit is not reached {% endcomment %}
+
+                                    
+                                    {% elif query and not limit_reached %}
                                         <div class="center-align grey-text text-darken-2">
                                             <div class="row"> 
                                                 <i class="material-icons md-48">emoji_nature</i>
