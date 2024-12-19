@@ -57,8 +57,8 @@
                                         <div class="card search-card">
                                             <div class="card-content">
                                                 <a href="{{item.link}}" rel="noopener" class="card-title search-title">{{item.title}}</a>
-                                                <p><span class="search-link" >{{item.htmlFormattedUrl | safe}}</span></p>
-                                                <p class="search-snippet">{{item.htmlSnippet | safe}}</p>
+                                                <p><span class="search-link" >{{item.displayed_link | safe}}</span></p>
+                                                <p class="search-snippet">{{item.snippet | safe}}</p>
                                             </div>
                                         </div>
                                 {% empty %} 
