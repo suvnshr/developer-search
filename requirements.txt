@@ -48,6 +48,6 @@ sqlparse==0.5.3
 tldextract==2.2.2
 tomlkit==0.13.2
 uritemplate==3.0.1
-urllib3==2.2.3
+urllib3==2.6.3
 webencodings==0.5.1
 whitenoise==6.8.2
