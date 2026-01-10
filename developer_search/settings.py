@@ -221,17 +221,3 @@ PWA_APP_ICONS_APPLE = [
     },
 ]
 
-# PWA_APP_SPLASH_SCREEN = [
-#     {
-#         'src': 'static/logo.png',
-#         'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
-#     }
-# ]
-
-# PWA_SERVICE_WORKER_PATH = os.path.join(
-#     BASE_DIR, 'search/templates/search', 'service_worker.js')
-
-
-# PWA_APP_DIR = 'ltr'
-# PWA_APP_LANG = 'en-US'
-# PWA_APP_DEBUG_MODE = True
