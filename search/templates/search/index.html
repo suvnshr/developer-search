@@ -1,153 +1,158 @@
-{% extends "search/base.html" %} 
+{% extends "search/base.html" %}
 {% load search_extras %}
-{% block body %}    
+{% block body %}
 
-    <div class="row">
-
-        {% comment %} Search form {% endcomment %}
+<div class="row">
+    {% if not query %}
+    {# Landing page - vertically centered #}
+    <div class="landing-container">
+        {# Search form #}
         <form method="GET" class="col s12 m10 offset-m1 l6 offset-l3">
 
-            <h5 class="center-align major-mono"> 
-            <span id="dev-heading">Dev</span><span id="remaining-heading">Xplore</span> </h5>
+            <h5 class="center-align dexplore-text-logo">
+                <span id="dev-heading">Dev</span><span id="remaining-heading">Xplore</span>
+            </h5>
+            
+            {# Landing page tagline #}
+            <div class="col s12 center-align">
+                <p class="tagline">Categorized search for developers</p>
+            </div>
+            
             <div class="row"></div>
             <div class="input-field z-depth-1" id="search-box">
-                    <i id="search-icon" class="material-icons prefix">search</i>
-
-                    <input
-                        type="search"
-                        id="search-field"
-                        placeholder="Web, App, APIs"
-                        name="q"
-                        value="{{query}}"
-                    />
+                <i id="search-icon" class="material-icons prefix">search</i>
+                <input type="search" id="search-field" placeholder="Search tutorials, docs, APIs..." name="q" value="{{query}}" />
             </div>
-            {% if not query %}
-                <div class="right-align ">
-                    <button type="submit" class="rounded btn-small waves-effect theme-button" >Search</button>
-                </div>
-            {% endif %}
 
         </form>
 
-        {% if query %}
-
-            {% comment %} Results section {% endcomment %}
-
-            <div id="results" class="col s12 m8 offset-m2 l6 offset-l3">
-
-                    {% comment %} Tabs  {% endcomment %}
-                    <ul class="tabs row">
-                        {% for category in results.keys %}
-                            <li class="tab m2 l2 xl2">
-                                <a class="{{category}} {% if forloop.counter0 == 0  %} active {% endif %}"  
-                                    href="#search-{{category|to_hyphens}}">
-                                    {{category}}
-                                </a>
-                            </li>
-                        {% endfor %} 
-                    </ul>
-
-                    {% comment %} Extra margin {% endcomment %}
-                    <div class="row"></div>
-
-                    {% comment %} Search results {% endcomment %}
-                    {% for category, search_results in results.items %}
-                        <div id="search-{{category|to_hyphens}}">
-                            {% for item in search_results %}
-                                        <div class="card search-card">
-                                            <div class="card-content">
-                                                <a href="{{item.link}}" rel="noopener" class="card-title search-title">{{item.title}}</a>
-                                                <p><span class="search-link" >{{item.displayed_link | safe}}</span></p>
-                                                <p class="search-snippet">{{item.snippet | safe}}</p>
-                                            </div>
-                                        </div>
-                                {% empty %} 
-
-
-                                    {% comment %} if no results found and daily search limit is not reached {% endcomment %}
-                                    {% if error_occured %}
-                                        <div class="center-align grey-text text-darken-2">
-                                            <div class="row"> 
-                                                <i class="material-icons md-48">warning</i>
-                                            </div>
-                                            <div>
-                                                <span class="light-text med-font">Something went wrong</span>
-                                            </div>
-                                        </div>
-                                        <div class="center-align grey-text text-darken-2">
-                                            <span> 
-                                                <small class="light-text">Please try again in a while</small>
-                                            </span>
-                                        </div>
-                                        <div class="row"></div>
-
-                                    {% comment %} if no results found and daily search limit is not reached {% endcomment %}
-
-                                    
-                                    {% elif query and not limit_reached %}
-                                        <div class="center-align grey-text text-darken-2">
-                                            <div class="row"> 
-                                                <i class="material-icons md-48">emoji_nature</i>
-                                            </div>
-                                            <div>
-                                                <span class="light-text med-font">Nothing found </span>
-                                            </div>
-                                        </div>
-                                        <div class="center-align grey-text text-darken-2">
-                                            <span> 
-                                                <small class="light-text">Try navigating to previous or next page</small>
-                                            </span>
-                                        </div>
-                                        <div class="row"></div>
-                                    
-                                    {% comment %} if no results found and daily search limit is exceeded {% endcomment %}
-                                    {% elif query and limit_reached %}
-                                        <div class="center-align grey-text text-darken-2 no-margin">
-                                            <div class="row">
-                                                <i class="material-icons md-48">timelapse</i>
-                                            </div>
-                                            <div> 
-                                                <span class="light-text med-font"> Search limit reached </span>
-                                            </div>
-                                             <div class="center-align grey-text text-darken-2">
-                                               <span> 
-                                                    <small class="light-text">Try searching after sometime</small>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    {% endif %} 
-
-                            {% endfor %}
-
-                            <div>
-                                {% if has_prev_page %}
-                                    <div class="left">
-                                        <a href="{{prev_page_url}}#search-{{category}}" 
-                                            class="btn-small waves-effect rounded theme-button white-text transparent">
-                                            <i class="material-icons left">arrow_back</i>
-                                            <span>Previous</span>
-                                        </a>
-                                    </div>
-                                {% endif %}
-
-                                {% if has_next_page %}
-                                    <div class="right">
-                                        <a href="{{next_page_url}}#search-{{category}}" 
-                                            class="btn-small waves-effect rounded theme-button white-text transparent">
-                                            <span>Next</span>
-                                            <i class="material-icons right">arrow_forward</i>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            </div>
-
-                        </div>
-                    {% endfor %}
-
-
-                  
+        {# Feature cards #}
+        <div class="col s12">
+            <div class="landing-features">
+                <div class="feature-card">
+                    <i class="material-icons">code</i>
+                    <h6>Web Development</h6>
+                    <p>Frontend, backend, and full-stack resources</p>
+                </div>
+                <div class="feature-card">
+                    <i class="material-icons">phone_android</i>
+                    <h6>App Development</h6>
+                    <p>Mobile app tutorials and guides</p>
+                </div>
+                <div class="feature-card">
+                    <i class="material-icons">api</i>
+                    <h6>APIs & Tools</h6>
+                    <p>Documentation and integration guides</p>
+                </div>
             </div>
-        {% endif %}
+        </div>
+    </div>
+    {% else %}
+    {# Search results page - normal layout #}
+    
+    {# Search form #}
+    <form method="GET" class="col s12 m10 offset-m1 l6 offset-l3">
+
+        <h5 class="center-align dexplore-text-logo">
+            <span id="dev-heading">Dev</span><span id="remaining-heading">Xplore</span>
+        </h5>
+        
+        <div class="row"></div>
+        <div class="input-field z-depth-1" id="search-box">
+            <i id="search-icon" class="material-icons prefix">search</i>
+            <input type="search" id="search-field" placeholder="Web, App, APIs" name="q" value="{{query}}" />
+        </div>
+
+    </form>
+
+    {% comment %} Results section {% endcomment %}
+
+    <div id="results" class="col s12 m8 offset-m2 l6 offset-l3">
+
+        {% comment %} Tabs {% endcomment %}
+        <ul class="tabs row">
+            {% for category in results.keys %}
+            <li class="tab m2 l2 xl2">
+                <a class="{{category}} {% if forloop.counter0 == 0  %} active {% endif %}"
+                    href="#search-{{category|to_hyphens}}">
+                    {{category}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {% comment %} Extra margin {% endcomment %}
+        <div class="row"></div>
+
+        {% comment %} Search results {% endcomment %}
+        {% for category, search_results in results.items %}
+        <div id="search-{{category|to_hyphens}}">
+            {% for item in search_results %}
+            <div class="card search-card">
+                <div class="card-content">
+                    <a href="{{item.link}}" rel="noopener" class="card-title search-title">{{item.title}}</a>
+                    <p><span class="search-link">{{item.displayed_link | safe}}</span></p>
+                    <p class="search-snippet">{{item.snippet | safe}}</p>
+                </div>
+            </div>
+            {% empty %}
+
+
+            {% comment %} if error occurred {% endcomment %}
+            {# Error state #}
+            {% if error_occured %}
+            <div class="empty-state error-state">
+                <i class="material-icons md-48">warning</i>
+                <span class="light-text med-font">Something went wrong</span>
+                <small class="light-text">Please try again in a while</small>
+            </div>
+
+            {% comment %} if no results found and daily search limit is not reached {% endcomment %}
+            {% elif query and not limit_reached %}
+            <div class="empty-state no-results">
+                <i class="material-icons md-48">search_off</i>
+                <span class="light-text med-font">No results found</span>
+                <small class="light-text">Try different keywords or check another category</small>
+            </div>
+
+            {% comment %} if no results found and daily search limit is exceeded {% endcomment %}
+            {% elif query and limit_reached %}
+            <div class="empty-state limit-state">
+                <i class="material-icons md-48">hourglass_empty</i>
+                <span class="light-text med-font">Search limit reached</span>
+                <small class="light-text">Please try again later</small>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+
+            <div>
+                {% if has_prev_page %}
+                <div class="left">
+                    <a href="{{prev_page_url}}#search-{{category}}"
+                        class="btn-small waves-effect rounded theme-button white-text transparent">
+                        <i class="material-icons left">arrow_back</i>
+                        <span>Previous</span>
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if has_next_page %}
+                <div class="right">
+                    <a href="{{next_page_url}}#search-{{category}}"
+                        class="btn-small waves-effect rounded theme-button white-text transparent">
+                        <span>Next</span>
+                        <i class="material-icons right">arrow_forward</i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
 
     </div>
+    {% endif %}
+
+</div>
 {% endblock body %}

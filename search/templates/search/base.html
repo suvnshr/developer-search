@@ -1,122 +1,141 @@
 {% load static %}
+{% load compress %}
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="google-site-verification" content="xrEq34SiNE9z1rg-b5rC9csvIk4YJunG0KMzQNgRIUk" />
-    <meta name="description" content="A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster.">
-    <meta name="robots" content="nofollow" />
-    <meta name="keywords" content="devxplore, developer search, developer search engine," />
 
-    {% if not theme or theme == "light" %}
-      <meta name="theme-color" content="#370e42">
-    {% elif theme == "dark" %}
-      <meta name="theme-color" content="#222">
-    {% endif %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="google-site-verification" content="xrEq34SiNE9z1rg-b5rC9csvIk4YJunG0KMzQNgRIUk" />
+  <meta name="description"
+    content="A search engine for developers to find Github Repos, youtube tutorials, online courses, and documentation faster.">
+  <meta name="robots" content="nofollow" />
+  <meta name="keywords" content="devxplore, developer search, developer search engine," />
 
-
-    {% comment %} Favicon {% endcomment %}
-    <link rel="icon" 
-      type="image/png" 
-      href="{% static 'short-logo.png' %}">
-
-    <title>{% block title %} DevXplore - A Search Engine for Developers {% endblock title %}</title>
-
-    {% block css %}
-      {% comment %} Materialize css {% endcomment %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 
 
-      {% comment %} No "theme" session is set, so follow the preferred color scheme set by system {% endcomment %}
-      {% if not theme %} 
-         <link rel="stylesheet" 
-              href="{% static 'light-variables.min.css' %}"
-              media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" >
-        <link 
-          rel="stylesheet" 
-          href="{% static 'dark-variables.min.css' %}" 
-          media="(prefers-color-scheme: dark)" >
+  {% if not theme or theme == "light" %}
+  <meta name="theme-color" content="#370e42">
+  {% elif theme == "dark" %}
+  <meta name="theme-color" content="#222">
+  {% endif %}
 
-      {% comment %} Only include `light-variables` css, if session "theme" is set to "light" {% endcomment %}
-      {% elif theme == "light" %}
-        
-        <link rel="stylesheet" href="{% static 'light-variables.min.css' %}" >
 
-      {% comment %} Only include `dark-variables` css, if session "theme" is set to "dark" {% endcomment %}
-      {% elif theme == "dark"%}
-      
-        <link rel="stylesheet" href="{% static 'dark-variables.min.css' %}" >
-      
-      {% endif %}
+  {% comment %} Favicon {% endcomment %}
+  <link rel="icon" href="{% static 'favicons/favicon.ico' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
 
-        <link rel="stylesheet" href="{% static 'index.min.css' %}" >
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    {% endblock css %}
+  <link rel="apple-touch-icon" href="{% static 'favicons/apple-touch-icon.png' %}">
+  <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
 
-  </head>
-  <body class="major-mono">
-    {% comment %} Main content {% endcomment %}
-    <main>
-      {% block body %}
-      {% endblock body %}
-    </main>
+  <title>{% block title %} DevXplore - A Search Engine for Developers {% endblock title %}</title>
+
+  {% block css %}
+  {% comment %} Materialize css {% endcomment %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  {% comment %} No "theme" session is set, so follow the preferred color scheme set by system {% endcomment %}
+  {% if not theme %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'light-variables.css' %}"
+    media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
+  <link rel="stylesheet" href="{% static 'dark-variables.css' %}" media="(prefers-color-scheme: dark)">
+  {% endcompress %}
+
+  {% comment %} Only include `light-variables` css, if session "theme" is set to "light" {% endcomment %}
+  {% elif theme == "light" %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'light-variables.css' %}">
+  {% endcompress %}
+
+  {% comment %} Only include `dark-variables` css, if session "theme" is set to "dark" {% endcomment %}
+  {% elif theme == "dark" %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'dark-variables.css' %}">
+  {% endcompress %}
+  {% endif %}
+  {% compress css %}
+  <link rel="stylesheet" href="{% static 'index.css' %}">
+  {% endcompress %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  {% endblock css %}
+
+</head>
+
+<body>
+  {% comment %} Main content {% endcomment %}
+  <main>
+    {% block body %}
+    {% endblock body %}
+  </main>
 
 
   {% comment %} Footer {% endcomment %}
   {% block footer %}
 
-    <footer class="page-footer z-depth-1">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5>  
-                  <a href="/">
-                    <span class="purple-text text-lighten-3">Dev</span><span class="white-text">Xplore</span>
-                  </a>
-                </h5>
-                <p class="grey-text text-lighten-4">The search engine for developers by a developer. </p>
-              </div>
+  <footer class="page-footer z-depth-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="dexplore-text-logo">
+            <a href="/">
+              <span class="purple-text text-lighten-3">Dev</span><span class="white-text">Xplore</span>
+            </a>
+          </h5>
+          <p class="tagline">Categorized search for developers</p>
+        </div>
 
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">About</h5>
-                <ul>
-                  <li><a target="_blank" rel="noopener" class="grey-text text-lighten-3" href="https://github.com/suvnshr/developer-search/blob/master/README.md#devxplore">About the project</a></li>
-                  <li><a target="_blank" rel="noopener" class="grey-text text-lighten-3" href="https://suvanshrana.com">About me</a></li>
-                  <li><a class="grey-text text-lighten-3" href="{% url 'search:credits' %}">Credits</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Learn More</h5>
+          <ul>
+            <li><a target="_blank" rel="noopener noreferrer"
+                href="https://github.com/suvnshr/developer-search/blob/master/README.md#devxplore">Project overview</a>
+            </li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://suvanshrana.com"> About
+                the Author</a></li>
+            <li><a href="{% url 'search:credits' %}">Open Source Credits</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
 
-              <div class="left">
-               Created by Suvansh Rana
-              </div>
+        <div class="left">
+          Created by Suvansh Rana
+        </div>
 
-              <div class="right">
-                <a 
-                  id="theme-toggle"
-                  href="#!"
-                  class="clickable grey-text text-lighten-2">
-                  ...
-                </a>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <div class="right">
+          <a id="theme-toggle" href="#!" class="clickable grey-text text-lighten-2">
+            ...
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   {% endblock footer %}
 
-    {% block js %}
-        {% comment %} Materialize Js {% endcomment %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script type="text/javascript">const overide_preferred_color_scheme={{theme_session_set|safe}},LIGHT_THEME_URL="{{light_theme_url|safe}}",DARK_THEME_URL="{{dark_theme_url|safe}}";</script>
-        <script src="{% static 'index.min.js' %}"></script>
-    {% endblock js %}
+  {% block js %}
+  {% comment %} Materialize Js {% endcomment %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script
+    type="text/javascript">const overide_preferred_color_scheme = {{ theme_session_set| safe}}, LIGHT_THEME_URL = "{{light_theme_url|safe}}", DARK_THEME_URL = "{{dark_theme_url|safe}}";</script>
+  {% compress js %}
 
-  </body>
+  <script src="{% static 'index.js' %}"></script>
+  {% endcompress %}
+
+  {% endblock js %}
+
+</body>
+
 </html>

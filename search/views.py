@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .helpers import perform_search_v2, manage_theme
 
+from .helpers.search import perform_search_v2
+from .helpers.theme import manage_theme
 
 # Create your views here.
 
@@ -35,61 +36,173 @@ def credits(request):
     # Data of each open source project included
     projects = {
         "Django": {
-            "description": "Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design",
+            "description": "High-level Python web framework encouraging rapid development and clean, pragmatic design.",
             "project_link": "https://github.com/django/django",
-            "license_type": "BSD",
-            "license_link": "https://github.com/django/django/blob/master/LICENSE.python",
-            "copyright": "Copyright (c) Django Software Foundation and individual contributors.",
+            "license_type": "BSD-3-Clause",
+            "license_link": "https://github.com/django/django/blob/main/LICENSE",
+            "copyright": "Copyright (c) Django Software Foundation",
         },
-        "Materialize": {
-            "description": "Materialize, a CSS Framework based on Material Design",
-            "project_link": "https://github.com/Dogfalo/materialize",
-            "license_type": "MIT",
-            "license_link": "https://github.com/Dogfalo/materialize/blob/v1-dev/LICENSE",
-            "copyright": "Copyright (c) 2014-2019 Materialize",
+        "asgiref": {
+            "description": "ASGI specifications and utilities for Python web applications.",
+            "project_link": "https://github.com/django/asgiref",
+            "license_type": "BSD-3-Clause",
+            "license_link": "https://github.com/django/asgiref/blob/main/LICENSE",
+            "copyright": "Copyright (c) Django Software Foundation",
         },
-        "rapidfuzz": {
-            "description": "Rapid fuzzy string matching in Python and C++ using the Levenshtein Distance",
-            "project_link": "https://github.com/maxbachmann/rapidfuzz",
+        "dj-database-url": {
+            "description": "Utility to configure Django database settings from environment variables.",
+            "project_link": "https://github.com/jazzband/dj-database-url",
+            "license_type": "BSD-3-Clause",
+            "license_link": "https://github.com/jazzband/dj-database-url/blob/main/LICENSE",
+            "copyright": "Copyright (c) Jazzband contributors",
+        },
+        "django-heroku": {
+            "description": "Django configuration wrapper for Heroku deployment.",
+            "project_link": "https://github.com/heroku/django-heroku",
             "license_type": "MIT",
-            "license_link": "https://github.com/maxbachmann/rapidfuzz/blob/master/LICENSE",
-            "copyright": "Copyright © 2020 maxbachmann. Copyright © 2011 Adam Cohen",
+            "license_link": "https://github.com/heroku/django-heroku/blob/main/LICENSE",
+            "copyright": "Copyright (c) Heroku",
         },
         "django-htmlmin": {
-            "description": "django-html is an HTML minifier for Python, with full support for HTML 5",
+            "description": "HTML minification middleware for Django with HTML5 support.",
             "project_link": "https://github.com/cobrateam/django-htmlmin",
-            "license_type": "BSD",
+            "license_type": "BSD-2-Clause",
             "license_link": "https://github.com/cobrateam/django-htmlmin/blob/master/LICENSE",
-            "copyright": "Copyright (c) 2012, django-htmlmin authors. All rights reserved.",
+            "copyright": "Copyright (c) django-htmlmin authors",
         },
-        "tldextract": {
-            "description": "Accurately separate the TLD from the registered domain and subdomains of a URL, using the Public Suffix List.",
-            "project_link": "https://github.com/john-kurkowski/tldextract",
-            "license_type": "BSD",
-            "license_link": "https://github.com/john-kurkowski/tldextract/blob/master/LICENSE",
-            "copyright": "Copyright (c) 2019, John Kurkowski. All rights reserved.",
-        },
-        "python-decouple": {
-            "description": "Decouple helps you to organize your settings so that you can change parameters without having to redeploy your app.",
-            "project_link": "https://github.com/henriquebastos/python-decouple/",
+        "whitenoise": {
+            "description": "Static file serving for Python web apps with compression and caching support.",
+            "project_link": "https://github.com/evansd/whitenoise",
             "license_type": "MIT",
-            "license_link": "https://github.com/henriquebastos/python-decouple/blob/master/LICENSE",
-            "copyright": "Copyright (c) 2013 Henrique Bastos",
+            "license_link": "https://github.com/evansd/whitenoise/blob/main/LICENSE",
+            "copyright": "Copyright (c) David Evans",
         },
         "gunicorn": {
-            "description": "gunicorn 'Green Unicorn' is a WSGI HTTP Server for UNIX, fast clients and sleepy applications",
+            "description": "WSGI HTTP server for UNIX, designed for high concurrency and performance.",
             "project_link": "https://github.com/benoitc/gunicorn",
             "license_type": "MIT",
             "license_link": "https://github.com/benoitc/gunicorn/blob/master/LICENSE",
-            "copyright": "2009-2018 (c) Benoît Chesneau. 2009-2015 (c) Paul J. Davis ",
+            "copyright": "Copyright (c) Benoît Chesneau",
+        },
+        "psycopg2": {
+            "description": "PostgreSQL database adapter for Python.",
+            "project_link": "https://github.com/psycopg/psycopg2",
+            "license_type": "LGPL-3.0",
+            "license_link": "https://github.com/psycopg/psycopg2/blob/master/LICENSE",
+            "copyright": "Copyright (c) psycopg contributors",
+        },
+        "python-decouple": {
+            "description": "Configuration management via environment variables.",
+            "project_link": "https://github.com/henriquebastos/python-decouple",
+            "license_type": "MIT",
+            "license_link": "https://github.com/henriquebastos/python-decouple/blob/master/LICENSE",
+            "copyright": "Copyright (c) Henrique Bastos",
+        },
+        "requests": {
+            "description": "HTTP library for Python, designed to be simple and human-friendly.",
+            "project_link": "https://github.com/psf/requests",
+            "license_type": "Apache-2.0",
+            "license_link": "https://github.com/psf/requests/blob/main/LICENSE",
+            "copyright": "Copyright (c) Kenneth Reitz",
+        },
+        "urllib3": {
+            "description": "Powerful HTTP client library used by requests.",
+            "project_link": "https://github.com/urllib3/urllib3",
+            "license_type": "MIT",
+            "license_link": "https://github.com/urllib3/urllib3/blob/main/LICENSE.txt",
+            "copyright": "Copyright (c) urllib3 contributors",
+        },
+        "certifi": {
+            "description": "Mozilla’s curated collection of root certificates for SSL validation.",
+            "project_link": "https://github.com/certifi/python-certifi",
+            "license_type": "MPL-2.0",
+            "license_link": "https://github.com/certifi/python-certifi/blob/master/LICENSE",
+            "copyright": "Copyright (c) Kenneth Reitz",
+        },
+        "charset-normalizer": {
+            "description": "Encoding detection library for Python.",
+            "project_link": "https://github.com/Ousret/charset_normalizer",
+            "license_type": "MIT",
+            "license_link": "https://github.com/Ousret/charset_normalizer/blob/main/LICENSE",
+            "copyright": "Copyright (c) Ousret",
+        },
+        "idna": {
+            "description": "Internationalized Domain Names support for Python.",
+            "project_link": "https://github.com/kjd/idna",
+            "license_type": "BSD-3-Clause",
+            "license_link": "https://github.com/kjd/idna/blob/master/LICENSE.md",
+            "copyright": "Copyright (c) Kim Davies",
+        },
+        "beautifulsoup4": {
+            "description": "HTML and XML parsing library for web scraping.",
+            "project_link": "https://www.crummy.com/software/BeautifulSoup/",
+            "license_type": "MIT",
+            "license_link": "https://www.crummy.com/software/BeautifulSoup/bs4/doc/#license",
+            "copyright": "Copyright (c) Leonard Richardson",
+        },
+        "soupsieve": {
+            "description": "CSS selector library used by BeautifulSoup.",
+            "project_link": "https://github.com/facelessuser/soupsieve",
+            "license_type": "MIT",
+            "license_link": "https://github.com/facelessuser/soupsieve/blob/main/LICENSE.md",
+            "copyright": "Copyright (c) Isaac Muse",
+        },
+        "html5lib": {
+            "description": "Standards-compliant HTML parsing library.",
+            "project_link": "https://github.com/html5lib/html5lib-python",
+            "license_type": "MIT",
+            "license_link": "https://github.com/html5lib/html5lib-python/blob/master/LICENSE",
+            "copyright": "Copyright (c) html5lib contributors",
+        },
+        "tldextract": {
+            "description": "Separates subdomain, domain, and TLD using the Public Suffix List.",
+            "project_link": "https://github.com/john-kurkowski/tldextract",
+            "license_type": "BSD-3-Clause",
+            "license_link": "https://github.com/john-kurkowski/tldextract/blob/master/LICENSE",
+            "copyright": "Copyright (c) John Kurkowski",
+        },
+        "RapidFuzz": {
+            "description": "High-performance fuzzy string matching library.",
+            "project_link": "https://github.com/maxbachmann/RapidFuzz",
+            "license_type": "MIT",
+            "license_link": "https://github.com/maxbachmann/RapidFuzz/blob/main/LICENSE",
+            "copyright": "Copyright (c) Max Bachmann",
         },
         "SerpApi": {
-            "description": "SerpApi is a real-time API to access search engine result pages (SERPs).",
+            "description": "API client for accessing search engine results.",
             "project_link": "https://github.com/serpapi/google-search-results-python",
             "license_type": "MIT",
             "license_link": "https://github.com/serpapi/google-search-results-python/blob/master/LICENSE",
-            "copyright": "Copyright (c) 2020 SerpApi, LLC",
+            "copyright": "Copyright (c) SerpApi",
         },
+        "google-api-python-client": {
+            "description": "Official Python client library for Google APIs.",
+            "project_link": "https://github.com/googleapis/google-api-python-client",
+            "license_type": "Apache-2.0",
+            "license_link": "https://github.com/googleapis/google-api-python-client/blob/main/LICENSE",
+            "copyright": "Copyright (c) Google LLC",
+        },
+        "google-auth": {
+            "description": "Google authentication library for Python.",
+            "project_link": "https://github.com/googleapis/google-auth-library-python",
+            "license_type": "Apache-2.0",
+            "license_link": "https://github.com/googleapis/google-auth-library-python/blob/main/LICENSE",
+            "copyright": "Copyright (c) Google LLC",
+        },
+        "protobuf": {
+            "description": "Protocol Buffers serialization library.",
+            "project_link": "https://github.com/protocolbuffers/protobuf",
+            "license_type": "BSD-3-Clause",
+            "license_link": "https://github.com/protocolbuffers/protobuf/blob/main/LICENSE",
+            "copyright": "Copyright (c) Google",
+        },
+        "Materialize": {
+            "description": "Modern responsive CSS framework based on Material Design.",
+            "project_link": "https://github.com/Dogfalo/materialize",
+            "license_type": "MIT",
+            "license_link": "https://github.com/Dogfalo/materialize/blob/v1-dev/LICENSE",
+            "copyright": "Copyright (c) Materialize",
+        }
     }
 
     return render(

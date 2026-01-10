@@ -1,63 +1,67 @@
 {% extends 'search/base.html' %}
 
-
-
 {% block body %}
 
-<div class="row">
-    <div class="col s12 m6 offset-m2 l6 offset-l3">
+<div class="container">
+    <h5 class="center-align">Credits</h5>
 
-        <h5 class='center-align'>Credits</h5>
-        <div class="row"></div>
-        <p class='center-align snippet-color'>
-            DevXplore uses many open source components. Below you will find the link to the code and license of each open source projects. 
-            <br>
-            We really appreciate the contribution of the developers of these projects to open source ❤️ 
-        </p>
-        <div class="row"></div>
+    <div class="row"></div>
 
-        <div>
-            {% for project_name, project_details in projects.items %}
-                    <div class="card credits-card center-align" id="{{project_name}}">
-                        <div class="card-content snippet">
+    <p class="center-align snippet-color">
+        DevXplore uses many open source projects. Below are links to their code and licenses.  
+        We deeply appreciate the open source community’s contributions. 💜
 
-                            <h6 class="credits-title"> {{project_name}} </h6>
+    </p>
 
-                            <p class="search-snippet">
-                                {{project_details.description}}
+    <div class="row"></div>
 
-                                <div class="row"></div>
 
-                                <div>
-                                    <small> {{project_details.copyright}} </small>
-                                </div>
-                            </p>
+    <!-- Cards Grid -->
+    <div class="auto-grid">
+        {% for project_name, project_details in projects.items %}
+        <div class="card credits-card" id="{{ project_name }}">
 
-                        </div>
+            <div class="card-content">
+                <h6 class="credits-title center-align">
+                    {{ project_name }}
+                </h6>
 
-                        <div class="card-action credits-action">
-                            <a target="_blank" rel="noopener" class="no-margin btn-flat credits-button credits-action-link"   href="{{project_details.project_link}}">Project Link</a>
-                            <a target="_blank" rel="noopener" class="no-margin btn-flat credits-button credits-action-link" href="{{project_details.license_link}}">
-                                License 
-                                <span class="snippet-color">  ({{project_details.license_type}})  </span> 
-                            </a> 
-                        </div>
-                  </div>
-            {% endfor %}
+                <p class="search-snippet">
+                    {{ project_details.description }}
+                </p>
 
-            <div class="row"></div>
-
-            <div class="center-align">
-                <a class="btn-small theme-button" href="/"> Go back to search </a>
+                <div class="section">
+                    <small>
+                        {{ project_details.copyright }}
+                    </small>
+                </div>
             </div>
-            
+
+            <div class="card-action center-align credits-action">
+                <a target="_blank" rel="noopener" class="btn-flat credits-button credits-action-link"
+                    href="{{ project_details.project_link }}">
+                    Project Link
+                </a>
+
+                <a target="_blank" rel="noopener" class="btn-flat credits-button credits-action-link"
+                    href="{{ project_details.license_link }}">
+                    License
+                    <span class="snippet-color">
+                        ({{ project_details.license_type }})
+                    </span>
+                </a>
+            </div>
 
         </div>
-
+        {% endfor %}
     </div>
+
+    <div class="row"></div>
+
+    <div class="row center-align">
+        <a class="btn-small theme-button rounded" href="/">Go back to search</a>
+    </div>
+
 </div>
-
-
-
 
 {% endblock body %}
