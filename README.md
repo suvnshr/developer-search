@@ -75,6 +75,11 @@ Category rules are defined declaratively and can be extended without modifying t
 
 ---
 
+## 🎬 Demo
+
+![DevXplore Demo](./gallery/devxplore-v2.gif "DevXplore Demo")
+
+
 ## 🛠️ Setup and Installation
 
 The following steps describe how to run DevXplore locally for development or evaluation purposes.
@@ -90,7 +95,7 @@ The following steps describe how to run DevXplore locally for development or eva
 ```bash
 git clone https://github.com/suvansh-rana/developer-search.git
 cd developer-search
-````
+```
 
 ### 🧪 Create and Activate a Virtual Environment
 
