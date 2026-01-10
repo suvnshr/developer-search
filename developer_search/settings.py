@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static'
             ],
         },
     },
@@ -127,6 +130,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -145,93 +150,20 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO',
                            'https') if production else ("", "")
 SECURE_SSL_REDIRECT = production
 
-PWA_APP_NAME = 'DevXplore'
-PWA_APP_DESCRIPTION = "A search engine for developers"
-PWA_APP_BACKGROUND_COLOR = '#ffffff'
-PWA_APP_DISPLAY = 'standalone'
-PWA_APP_SCOPE = '/'
-PWA_APP_ORIENTATION = 'any'
-PWA_APP_START_URL = '/'
-PWA_APP_STATUS_BAR_COLOR = 'black-translucent'
 
-PWA_APP_ICONS = [
-    {
-        'src': 'static/icons/android-icon-36x36.png',
-        'sizes': '36x36',
-    },
-    {
-        'src': 'static/icons/android-icon-48x48.png',
-        'sizes': '48x48',
-    },
-    {
-        'src': 'static/icons/android-icon-72x72.png',
-        'sizes': '72x72',
-    },
-    {
-        'src': 'static/icons/android-icon-96x96.png',
-        'sizes': '96x96',
-    },
-    {
-        'src': 'static/icons/android-icon-144x144.png',
-        'sizes': '144x144',
-    },
-    {
-        'src': 'static/icons/android-icon-192x192.png',
-        'sizes': '192x192',
-    },
+# Compressor configuration
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 ]
 
+# Enable compression
+COMPRESS_ENABLED = True
 
-PWA_APP_ICONS_APPLE = [
-    {
-        'src': 'static/icons/apple-icon-57x57.png',
-        'sizes': '57x57',
-    },
-    {
-        'src': 'static/icons/apple-icon-60x60.png',
-        'sizes': '60x60',
-    },
-    {
-        'src': 'static/icons/apple-icon-72x72.png',
-        'sizes': '72x72',
-    },
-    {
-        'src': 'static/icons/apple-icon-76x76.png',
-        'sizes': '76x76',
-    },
-    {
-        'src': 'static/icons/apple-icon-114x114.png',
-        'sizes': '114x114',
-    },
-    {
-        'src': 'static/icons/apple-icon-120x120.png',
-        'sizes': '120x120',
-    },
-    {
-        'src': 'static/icons/apple-icon-144x144.png',
-        'sizes': '144x144',
-    },
-    {
-        'src': 'static/icons/apple-icon-152x152.png',
-        'sizes': '152x152',
-    },
-    {
-        'src': 'static/icons/apple-icon-180x180.png',
-        'sizes': '180x180',
-    },
-]
+# Precompile during collectstatic for production
+COMPRESS_OFFLINE = True
 
-# PWA_APP_SPLASH_SCREEN = [
-#     {
-#         'src': 'static/logo.png',
-#         'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
-#     }
-# ]
-
-# PWA_SERVICE_WORKER_PATH = os.path.join(
-#     BASE_DIR, 'search/templates/search', 'service_worker.js')
-
-
-# PWA_APP_DIR = 'ltr'
-# PWA_APP_LANG = 'en-US'
-# PWA_APP_DEBUG_MODE = True
+# Optional: specify output directory for compressed files
+COMPRESS_OUTPUT_DIR = 'CACHE'

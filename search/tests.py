@@ -9,13 +9,14 @@ class ProductionTestCase(TestCase):
     def test_is_debug_off(self):
         """ ensures that the project has DEBUG set to False """
 
-        self.assertFalse(settings.DEBUG, "DEBUG is ON, not ready for production !")
-
+        self.assertFalse(
+            settings.DEBUG,
+            "DEBUG is ON, not ready for production !")
 
     def test_is_https_forced(self):
-        """ 
-            ensures that the settings which ensure that https is enforced on site, 
-            are enabled and correct. 
+        """
+            ensures that the settings which ensure that https is enforced on site,
+            are enabled and correct.
         """
 
         self.assertTrue(hasattr(settings, 'SECURE_PROXY_SSL_HEADER'),
