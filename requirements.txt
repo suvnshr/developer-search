@@ -45,7 +45,7 @@ pytokens==0.3.0
 pytz==2025.2
 RapidFuzz==3.14.3
 rcssmin==1.2.2
-requests==2.32.5
+requests==2.33.0
 requests-file==3.0.1
 rjsmin==1.2.5
 rsa==4.9.1
